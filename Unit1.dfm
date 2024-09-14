@@ -15,6 +15,13 @@ object Form1: TForm1
   Position = poDesktopCenter
   OnClose = FormClose
   TextHeight = 15
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 34
+    Height = 15
+    Caption = 'Label1'
+  end
   object Button1: TButton
     Left = 5
     Top = 370

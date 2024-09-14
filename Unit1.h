@@ -15,9 +15,11 @@ class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
 	TButton *Button1;
+	TLabel *Label1;
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall Button1Click(TObject *Sender);
 private:	// User declarations
+	Network* network = new Network(10,10,3,0.01);
 	std::vector<MyPoint*> testPoints;
 	std::vector<MyPoint*> Points;
 	std::vector<std::vector<int>> coordinatesOfTestPoints =

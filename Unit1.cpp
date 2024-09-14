@@ -49,6 +49,9 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	if (testPoints.empty()) {
 			ShowPoints();
 		}
+	for (size_t i = 0; i < testPoints.size(); ++i) {
+		network->NetworkTraining(testPoints[i]->GetX(),testPoints[i]->GetY(),
+			testPoints[i]->GetColor());
+	}
 }
 //---------------------------------------------------------------------------
-

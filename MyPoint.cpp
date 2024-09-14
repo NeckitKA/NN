@@ -8,7 +8,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 
-MyPoint::MyPoint(int x, int y, bool color) {
+MyPoint::MyPoint(int x, int y, int color) {
 	SetX(x);
 	SetY(y);
 	SetColor(color);
@@ -26,7 +26,7 @@ void MyPoint::SetY(int y) {
 }
 //---------------------------------------------------------------------------
 
-void MyPoint::SetColor(bool color) {
+void MyPoint::SetColor(int color) {
 	Color = color;
 }
 //---------------------------------------------------------------------------
@@ -41,7 +41,7 @@ int MyPoint::GetY() const {
 }
 //---------------------------------------------------------------------------
 
-bool MyPoint::GetColor() const {
+int MyPoint::GetColor() const {
 	return Color;
 }
 //---------------------------------------------------------------------------
