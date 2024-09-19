@@ -5,17 +5,17 @@
 //---------------------------------------------------------------------------
 class MyPoint{
 	private:
-		int X, Y;
-		bool Color;
-		void SetX(int x);
-		void SetY(int y);
+		int X, Y, Color;
+
+		void SetX(double x);
+		void SetY(double y);
 		void SetColor(int color);
 
 	public:
-		MyPoint(int x, int y, int color);
+		MyPoint(double x, double y, int color);
 
-		int GetX() const;
-		int GetY() const;
+		double GetX() const;
+		double GetY() const;
 		int GetColor() const;
 		void ShowPoint();
 };

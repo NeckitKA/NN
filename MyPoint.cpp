@@ -8,7 +8,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 
-MyPoint::MyPoint(int x, int y, int color) {
+MyPoint::MyPoint(double x, double y, int color) {
 	SetX(x);
 	SetY(y);
 	SetColor(color);
@@ -16,12 +16,12 @@ MyPoint::MyPoint(int x, int y, int color) {
 }
 //---------------------------------------------------------------------------
 
-void MyPoint::SetX(int x) {
+void MyPoint::SetX(double x) {
 	X = x;
 }
 //---------------------------------------------------------------------------
 
-void MyPoint::SetY(int y) {
+void MyPoint::SetY(double y) {
 	Y = y;
 }
 //---------------------------------------------------------------------------
@@ -31,12 +31,12 @@ void MyPoint::SetColor(int color) {
 }
 //---------------------------------------------------------------------------
 
-int MyPoint::GetX() const {
+double MyPoint::GetX() const {
 	return X;
 }
 //---------------------------------------------------------------------------
 
-int MyPoint::GetY() const {
+double MyPoint::GetY() const {
 	return Y;
 }
 //---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ void MyPoint::ShowPoint(){
 	TForm1* form = dynamic_cast<TForm1*>(Application->MainForm);
 	form->Canvas->Pen->Color=clWhite;
 	form->Canvas->Pen->Width=2;
-	form->Canvas->Brush->Color = GetColor() ? clBlue : clRed;
+	form->Canvas->Brush->Color = GetColor()==1 ? clBlue :  clRed;
 	form->Canvas->Ellipse(GetX()-6,GetY()-6,GetX()+6,GetY()+6);
 }
 //---------------------------------------------------------------------------

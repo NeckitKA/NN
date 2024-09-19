@@ -349,7 +349,78 @@
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\algorithm \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xheap \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\random \
+  C:\Users\based\Desktop\NN/Unit1.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.Chart.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeeProcs.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\Vcl.Clipbrd.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\Winapi.MMSystem.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\mmsystem.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\mmsyscom.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\mciapi.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\mmiscapi.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\mmiscapi2.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\playsoundapi.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\mmeapi.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/pshpack1.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/poppack.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\timeapi.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\joystickapi.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeCanvas.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\System.Math.Vectors.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeEngine.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VclTee.TeeGDIPlus.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\Winapi.GDIPAPI.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\Winapi.DirectDraw.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\ddraw.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\dvp.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\System.Math.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\GdiPlus.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusMem.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusBase.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusEnums.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusTypes.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusInit.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusPixelFormats.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusColor.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusMetaHeader.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusImaging.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusColorMatrix.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusGpStubs.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusHeaders.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusFlat.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusImageAttributes.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusMatrix.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusBrush.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusPen.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusStringFormat.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusPath.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusLineCaps.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusGraphics.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusMetafile.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusCachedBitmap.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusRegion.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusFontCollection.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusFontFamily.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusFont.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusBitmap.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusImageCodec.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\Winapi.GDIPOBJ.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.Series.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\System.UIConsts.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeeSpline.hpp \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeeFunci.hpp \
+  C:\Users\based\Desktop\NN\MyPoint.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\iomanip \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xlocmon \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xloctime \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\fstream \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\filesystem \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\chrono \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\ratio \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\Dinkum/threads/xtimec.h \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\Dinkum/threads/xthrcommon.h
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\Dinkum/threads/xthrcommon.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\codecvt \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\locale \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xlocbuf \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xlocmes \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\list
