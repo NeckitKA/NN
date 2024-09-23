@@ -27,14 +27,14 @@ class Network{
 		double Sigmoid(double activation) const;
 		double SigmoidDerivative(double output) const;
 
+		void Visualize();
 		void GenerateWeights();
 		void Activate(int layer);
 		void SetLearningRate(double lRate);
-		void Visualize(double result, int g);
 		void BackwardPropagateError(int expected);
 		void UpdateWeights(std::vector<double> inputData);
 		void ForwardPropagate(std::vector<double> inputData);
-		void SetTheNumberOfNeuronsForEachLayer(int n0, int n1, int n2, int N3);
+		void SetNumOfNeuronsForLayers(int n0, int n1, int n2, int N3);
 
 	public:
 		Network(int n0, int n1, int n2, int n3, double learningRate);

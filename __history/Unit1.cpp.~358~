@@ -48,59 +48,32 @@ void TForm1::GenerateDataSet(int nClassObj1, int nClassObj2, int centerX,
 											  centerX+ringOuterRadius);
 	std::uniform_int_distribution<> distRingY(centerY-ringOuterRadius,
 											  centerY+ringOuterRadius);
-	if (learning) {
-		if (trainingSet.empty()) {
-			while (countClassObj1 != nClassObj1) {
-				x = distCircleX(gen);
-				y = distCircleY(gen);
-				if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
-					countClassObj1++;
-					trainingSet.push_back(new MyPoint(x, y, 1));
-				}
-			}
-			while (countClassObj2 != nClassObj2) {
-				x = distRingX(gen);
-				y = distRingY(gen);
-				distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
-				if (pow(ringInnerRadius, 2 )<= distanceSquared &&
-					distanceSquared <= pow(ringOuterRadius, 2)) {
-					countClassObj2++;
-					trainingSet.push_back(new MyPoint(x, y, 0));
-				}
-			}
+	std::vector<MyPoint*> &set = learning ? trainingSet : testSet;
 
-			if (shuffle) {
-				std::shuffle(trainingSet.begin(), trainingSet.end(), gen);
-			}
+	while (countClassObj1 != nClassObj1) {
+		x = distCircleX(gen);
+		y = distCircleY(gen);
+		if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
+			countClassObj1++;
+			set.push_back(new MyPoint(x, y, 1));
 		}
 	}
-	else {
-		if (testSet.empty()) {
-            while (countClassObj1 != nClassObj1) {
-				x = distCircleX(gen);
-				y = distCircleY(gen);
-				if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
-					countClassObj1++;
-					testSet.push_back(new MyPoint(x, y, 1));
-				}
-			}
-
-			while (countClassObj2 != nClassObj2) {
-				x = distRingX(gen);
-				y = distRingY(gen);
-				distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
-				if (pow(ringInnerRadius, 2) <= distanceSquared &&
-					distanceSquared <= pow(ringOuterRadius, 2)) {
-					countClassObj2++;
-					testSet.push_back(new MyPoint(x, y, 0));
-				}
-			}
-			if (shuffle) {
-				std::shuffle(testSet.begin(), testSet.end(), gen);
-			}
+	while (countClassObj2 != nClassObj2) {
+		x = distRingX(gen);
+		y = distRingY(gen);
+		distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
+		if (pow(ringInnerRadius, 2 )<= distanceSquared &&
+			distanceSquared <= pow(ringOuterRadius, 2)) {
+			countClassObj2++;
+			set.push_back(new MyPoint(x, y, 0));
 		}
+	}
+
+	if (shuffle) {
+		std::shuffle(set.begin(), set.end(), gen);
 	}
 }
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
@@ -108,15 +81,12 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 		GenerateDataSet(3000,3000,cX,cY, 30,95,100,true,true);
 		Timer1->Enabled=false;
 	}
-    if (testSet.empty()) {
-		GenerateDataSet(100,100,cX,cY, 30,95,100,false,false);
+	if (testSet.empty()) {
+		GenerateDataSet(3000,3000,cX,cY, 30,95,100,false,false);
 	}
-	std::random_shuffle(trainingSet.begin(), trainingSet.end());
-	static int epoch = 0;
 
-	if (epoch < 80) { //80
-		Canvas->Brush->Color = clGreen;
-		Canvas->FillRect(ClientRect);
+	if (epoch < 80 && learning) {
+		std::random_shuffle(trainingSet.begin(), trainingSet.end());
 		double accuracy=0;
 		double loss=0;
 		for (int j = 0; j < trainingSet.size(); ++j) {
@@ -142,12 +112,11 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 		loss = loss/trainingSet.size();
 		Series1->AddXY(epoch, accuracy, "",clBlue);
 		Series3->AddXY(epoch, loss, "", clBlue);
-		epoch++;
-
-
 
 		accuracy=0;
 		loss=0;
+        Canvas->Brush->Color = clGreen;
+		Canvas->FillRect(ClientRect);
 		for (int j = 0; j < testSet.size(); ++j) {
 			std::vector<double> inputData;
 			inputData.push_back(testSet[j]->GetX() - cX);
@@ -165,28 +134,24 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 
 			accuracy += ((testSet[j]->GetColor()==1 && output > 0.5) ||
 						 (testSet[j]->GetColor()==0 && output < 0.5));
+			loss+=abs(testSet[j]->GetColor()-output);
 		}
+		accuracy = accuracy / testSet.size();
+		loss = loss/testSet.size();
 		Series2->AddXY(epoch, accuracy, "",clRed);
 		Series4->AddXY(epoch, loss, "", clRed);
-
+		epoch++;
 	}
 	else {
 		Timer1->Enabled = false;
 	}
-
-
-
-
-
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-	if (trainingSet.empty()) {
-		GenerateDataSet(3000,3000,cX,cY, 30,95,100,true,true);
-	}
-	learnOrTest=1;
+	
+	learning=true;
 	Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
@@ -196,4 +161,3 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
     Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
-

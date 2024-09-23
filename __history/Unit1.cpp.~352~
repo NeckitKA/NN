@@ -112,9 +112,7 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 		GenerateDataSet(3000,3000,cX,cY, 30,95,100,false,false);
 	}
 
-	if (epoch < 80 && learning) { //80
-		Canvas->Brush->Color = clGreen;
-		Canvas->FillRect(ClientRect);
+	if (epoch < 80 && learning) {
 		std::random_shuffle(trainingSet.begin(), trainingSet.end());
 		double accuracy=0;
 		double loss=0;
@@ -142,9 +140,10 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 		Series1->AddXY(epoch, accuracy, "",clBlue);
 		Series3->AddXY(epoch, loss, "", clBlue);
 
-
 		accuracy=0;
 		loss=0;
+        Canvas->Brush->Color = clGreen;
+		Canvas->FillRect(ClientRect);
 		for (int j = 0; j < testSet.size(); ++j) {
 			std::vector<double> inputData;
 			inputData.push_back(testSet[j]->GetX() - cX);
@@ -191,4 +190,3 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
     Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
-

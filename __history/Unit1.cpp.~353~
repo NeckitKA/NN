@@ -49,55 +49,51 @@ void TForm1::GenerateDataSet(int nClassObj1, int nClassObj2, int centerX,
 	std::uniform_int_distribution<> distRingY(centerY-ringOuterRadius,
 											  centerY+ringOuterRadius);
 	if (learning) {
-		if (trainingSet.empty()) {
-			while (countClassObj1 != nClassObj1) {
-				x = distCircleX(gen);
-				y = distCircleY(gen);
-				if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
-					countClassObj1++;
-					trainingSet.push_back(new MyPoint(x, y, 1));
-				}
+		while (countClassObj1 != nClassObj1) {
+			x = distCircleX(gen);
+			y = distCircleY(gen);
+			if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
+				countClassObj1++;
+				trainingSet.push_back(new MyPoint(x, y, 1));
 			}
-			while (countClassObj2 != nClassObj2) {
-				x = distRingX(gen);
-				y = distRingY(gen);
-				distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
-				if (pow(ringInnerRadius, 2 )<= distanceSquared &&
-					distanceSquared <= pow(ringOuterRadius, 2)) {
-					countClassObj2++;
-					trainingSet.push_back(new MyPoint(x, y, 0));
-				}
+		}
+		while (countClassObj2 != nClassObj2) {
+			x = distRingX(gen);
+			y = distRingY(gen);
+			distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
+			if (pow(ringInnerRadius, 2 )<= distanceSquared &&
+				distanceSquared <= pow(ringOuterRadius, 2)) {
+				countClassObj2++;
+				trainingSet.push_back(new MyPoint(x, y, 0));
 			}
+		}
 
-			if (shuffle) {
-				std::shuffle(trainingSet.begin(), trainingSet.end(), gen);
-			}
+		if (shuffle) {
+			std::shuffle(trainingSet.begin(), trainingSet.end(), gen);
 		}
 	}
 	else {
-		if (testSet.empty()) {
-            while (countClassObj1 != nClassObj1) {
-				x = distCircleX(gen);
-				y = distCircleY(gen);
-				if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
-					countClassObj1++;
-					testSet.push_back(new MyPoint(x, y, 1));
-				}
+		while (countClassObj1 != nClassObj1) {
+			x = distCircleX(gen);
+			y = distCircleY(gen);
+			if (pow((x-centerX),2)+pow((y-centerY),2)<=pow(circleRadius,2)){
+				countClassObj1++;
+				testSet.push_back(new MyPoint(x, y, 1));
 			}
+		}
 
-			while (countClassObj2 != nClassObj2) {
-				x = distRingX(gen);
-				y = distRingY(gen);
-				distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
-				if (pow(ringInnerRadius, 2) <= distanceSquared &&
-					distanceSquared <= pow(ringOuterRadius, 2)) {
-					countClassObj2++;
-					testSet.push_back(new MyPoint(x, y, 0));
-				}
+		while (countClassObj2 != nClassObj2) {
+			x = distRingX(gen);
+			y = distRingY(gen);
+			distanceSquared = pow((x - centerX), 2) + pow((y - centerY), 2);
+			if (pow(ringInnerRadius, 2) <= distanceSquared &&
+				distanceSquared <= pow(ringOuterRadius, 2)) {
+				countClassObj2++;
+				testSet.push_back(new MyPoint(x, y, 0));
 			}
-			if (shuffle) {
-				std::shuffle(testSet.begin(), testSet.end(), gen);
-			}
+		}
+		if (shuffle) {
+			std::shuffle(testSet.begin(), testSet.end(), gen);
 		}
 	}
 }
@@ -108,13 +104,11 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 		GenerateDataSet(3000,3000,cX,cY, 30,95,100,true,true);
 		Timer1->Enabled=false;
 	}
-    if (testSet.empty()) {
-		GenerateDataSet(1000,1000,cX,cY, 30,95,100,false,false);
+	if (testSet.empty()) {
+		GenerateDataSet(3000,3000,cX,cY, 30,95,100,false,false);
 	}
 
-	if (epoch < 80 && learning) { //80
-		Canvas->Brush->Color = clGreen;
-		Canvas->FillRect(ClientRect);
+	if (epoch < 80 && learning) {
 		std::random_shuffle(trainingSet.begin(), trainingSet.end());
 		double accuracy=0;
 		double loss=0;
@@ -142,9 +136,10 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 		Series1->AddXY(epoch, accuracy, "",clBlue);
 		Series3->AddXY(epoch, loss, "", clBlue);
 
-
 		accuracy=0;
 		loss=0;
+        Canvas->Brush->Color = clGreen;
+		Canvas->FillRect(ClientRect);
 		for (int j = 0; j < testSet.size(); ++j) {
 			std::vector<double> inputData;
 			inputData.push_back(testSet[j]->GetX() - cX);
@@ -162,7 +157,10 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 
 			accuracy += ((testSet[j]->GetColor()==1 && output > 0.5) ||
 						 (testSet[j]->GetColor()==0 && output < 0.5));
+			loss+=abs(testSet[j]->GetColor()-output);
 		}
+		accuracy = accuracy / testSet.size();
+		loss = loss/testSet.size();
 		Series2->AddXY(epoch, accuracy, "",clRed);
 		Series4->AddXY(epoch, loss, "", clRed);
 		epoch++;
@@ -188,4 +186,3 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
     Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
-

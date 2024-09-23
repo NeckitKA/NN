@@ -7,13 +7,13 @@
 //---------------------------------------------------------------------------
 
 Network::Network(int n0, int n1, int n2, int n3, double learningRate) {
-	SetTheNumberOfNeuronsForEachLayer(n0, n1, n2, n3);
+	SetNumOfNeuronsForLayers(n0, n1, n2, n3);
 	GenerateWeights();
 	SetLearningRate(learningRate);
 }
 //---------------------------------------------------------------------------
 
-void Network::SetTheNumberOfNeuronsForEachLayer(int n0, int n1, int n2, int n3){
+void Network::SetNumOfNeuronsForLayers(int n0, int n1, int n2, int n3){
 	N0 = n0;
 	N1 = n1;
 	N2 = n2;
@@ -29,8 +29,10 @@ void Network::SetLearningRate(double lRate) {
 void Network::GenerateWeights() {
 	std::mt19937 gen(0);
 	std::uniform_real_distribution<> dis(-1.0, 1.0);
-
 	std::vector<std::vector<double>> firstHiddenLayer;
+	std::vector<std::vector<double>> secondHiddenLayer;
+	std::vector<std::vector<double>> outputLayer;
+
 	for (int i = 0; i < N1; ++i) {
 		std::vector<double> neuron;
 		for (int j = 0; j < N0+1; ++j) {
@@ -39,27 +41,25 @@ void Network::GenerateWeights() {
 		firstHiddenLayer.push_back(neuron);
 	}
 
-	std::vector<std::vector<double>> secondHiddenLayer;
 	for (int i = 0; i < N2; ++i) {
 		std::vector<double> neuron;
 		for (int j = 0; j < N1 + 1; ++j) {
 			neuron.push_back(dis(gen));
-        }
-        secondHiddenLayer.push_back(neuron);
-    }
+		}
+		secondHiddenLayer.push_back(neuron);
+	}
 
-	std::vector<std::vector<double>> outputLayer;
 	for (int i = 0; i < N3; ++i) {
 		std::vector<double> neuron;
 		for (int j = 0; j < N2 + 1; ++j) {
 			neuron.push_back(dis(gen));
         }
-        outputLayer.push_back(neuron);
+		outputLayer.push_back(neuron);
     }
 
-    network.push_back(firstHiddenLayer);
-    network.push_back(secondHiddenLayer);
-    network.push_back(outputLayer);
+	network.push_back(firstHiddenLayer);
+	network.push_back(secondHiddenLayer);
+	network.push_back(outputLayer);
 }
 //---------------------------------------------------------------------------
 
@@ -87,7 +87,8 @@ void Network::ForwardPropagate(std::vector<double> inputData) {
 
 	for (int i = 0; i < N2; ++i) {
 		for (int j = 0; j < N1; ++j) {
-			secondLayerActivations[i]+=network[1][i][j]*firstLayerActivations[j];
+			secondLayerActivations[i]+=network[1][i][j]*
+			  firstLayerActivations[j];
 		}
 		secondLayerActivations[i]+=network[1][i][N1];
 	}
@@ -95,7 +96,8 @@ void Network::ForwardPropagate(std::vector<double> inputData) {
 
 	for (int i = 0; i < N3; ++i) {
 		for (int j = 0; j < N2; ++j) {
-			outputLayerActivations[i]+=network[2][i][j]*secondLayerActivations[j];
+			outputLayerActivations[i]+=network[2][i][j]*
+			  secondLayerActivations[j];
 		}
 		outputLayerActivations[i]+=network[2][i][N2];
 	}
@@ -134,11 +136,12 @@ void Network::Activate(int layer) {
 
 void Network::BackwardPropagateError(int expected) {
 	outputLayerErrors.clear();
-    secondLayerErrors.assign(N2, 0.0);
+	secondLayerErrors.assign(N2, 0.0);
 	firstLayerErrors.assign(N1, 0.0);
 
 	for (int i = 0; i < N3; ++i) {
-		outputLayerErrors.push_back((outputLayerActivations[i]-expected)*SigmoidDerivative(outputLayerActivations[i]));
+		outputLayerErrors.push_back((outputLayerActivations[i]-expected)*
+		  SigmoidDerivative(outputLayerActivations[i]));
 	}
 
 	for (int i = 0; i < N2; ++i) {
@@ -173,26 +176,25 @@ void Network::UpdateWeights(std::vector<double> inputData) {
 
 	for (int i = 0; i < N2; ++i) {
 		for (int j = 0; j < N1; ++j) {
-			network[1][i][j]-=learningRate*secondLayerErrors[i]*network[0][j][i];
+		  network[1][i][j]-=learningRate*secondLayerErrors[i]*network[0][j][i];
 		}
 		network[1][i][N1]-=learningRate*secondLayerErrors[i];
 	}
 
 	for (int i = 0; i < N3; ++i) {
 		for (int j = 0; j < N2; ++j) {
-			network[2][i][j]-=learningRate*outputLayerErrors[i]*network[1][j][i];
+		  network[2][i][j]-=learningRate*outputLayerErrors[i]*network[1][j][i];
 		}
 		network[2][i][N2]-=learningRate*outputLayerErrors[i];
 	}
 }
 //---------------------------------------------------------------------------
 
-
 double Network::NetworkTraining(std::vector<double> inputData, int excepted) {
 	ForwardPropagate(inputData);
 	BackwardPropagateError(excepted);
 	UpdateWeights(inputData);
-	Visualize(outputLayerActivations[0],1);
+	//Visualize(outputLayerActivations[0],1);
 	return outputLayerActivations[0];
 }
 //---------------------------------------------------------------------------
@@ -202,40 +204,38 @@ double Network::Predict(const std::vector<double> inputData) {
 	Visualize(outputLayerActivations[0],2);
 	return outputLayerActivations[0];
 }
+//---------------------------------------------------------------------------
 
-
-void Network::Visualize(double result,int g) {
+void Network::Visualize(double result,int learning) {
 	TForm1* form = dynamic_cast<TForm1*>(Application->MainForm);
 	TCanvas* canvas = form->Canvas;
 	canvas->Brush->Color = clGreen;
 	form->Canvas->Pen->Width=0;
 	double confidence =  8 * pow(2*abs(result-0.5),2);
 	canvas->Brush->Color= result>0.5 ? clBlue : clRed;
-	switch (g) {
+	switch (learning) {
 		case 1:
-			canvas->Ellipse(form->trainingSet[i]->GetX()-confidence,
-							form->trainingSet[i]->GetY()-confidence,
-							form->trainingSet[i]->GetX()+confidence,
-							form->trainingSet[i]->GetY()+confidence);
-		i++;
-		if (i==form->trainingSet.size()) {
-			i=0;
+			canvas->Ellipse(form->trainingSet[objectNum]->GetX()-confidence,
+							form->trainingSet[objectNum]->GetY()-confidence,
+							form->trainingSet[objectNum]->GetX()+confidence,
+							form->trainingSet[objectNum]->GetY()+confidence);
+		objectNum++;
+		if (objectNum==form->trainingSet.size()) {
+			objectNum=0;
 		}
 		break;
 
 		case 2:
-			canvas->Ellipse(form->testSet[i]->GetX()-confidence,
-							form->testSet[i]->GetY()-confidence,
-							form->testSet[i]->GetX()+confidence,
-							form->testSet[i]->GetY()+confidence);
-			i++;
-			if (i==form->testSet.size()) {
-				i=0;
+			canvas->Ellipse(form->testSet[objectNum]->GetX()-confidence,
+							form->testSet[objectNum]->GetY()-confidence,
+							form->testSet[objectNum]->GetX()+confidence,
+							form->testSet[objectNum]->GetY()+confidence);
+			objectNum++;
+			if (objectNum==form->testSet.size()) {
+				objectNum=0;
 			}
     default:
 		break;
 	}
-
-
 }
 //---------------------------------------------------------------------------

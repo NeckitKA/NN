@@ -5,13 +5,15 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
+
 Network::Network(int n0, int n1, int n2, int n3, double learningRate) {
-	SetTheNumberOfNeuronsForEachLayer(n0, n1, n2, n3);
+	SetNumOfNeuronsForLayers(n0, n1, n2, n3);
 	GenerateWeights();
 	SetLearningRate(learningRate);
 }
 //---------------------------------------------------------------------------
-void Network::SetTheNumberOfNeuronsForEachLayer(int n0, int n1, int n2, int n3){
+
+void Network::SetNumOfNeuronsForLayers(int n0, int n1, int n2, int n3){
 	N0 = n0;
 	N1 = n1;
 	N2 = n2;
@@ -25,9 +27,6 @@ void Network::SetLearningRate(double lRate) {
 //---------------------------------------------------------------------------
 
 void Network::GenerateWeights() {
-	//std::random_device rd;
-	//std::mt19937 gen(rd());
-	//std::mt19937 gen(static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count()));
 	std::mt19937 gen(0);
 	std::uniform_real_distribution<> dis(-1.0, 1.0);
 
@@ -88,7 +87,8 @@ void Network::ForwardPropagate(std::vector<double> inputData) {
 
 	for (int i = 0; i < N2; ++i) {
 		for (int j = 0; j < N1; ++j) {
-			secondLayerActivations[i]+=network[1][i][j]*firstLayerActivations[j];
+			secondLayerActivations[i]+=network[1][i][j]*
+			  firstLayerActivations[j];
 		}
 		secondLayerActivations[i]+=network[1][i][N1];
 	}
@@ -96,12 +96,12 @@ void Network::ForwardPropagate(std::vector<double> inputData) {
 
 	for (int i = 0; i < N3; ++i) {
 		for (int j = 0; j < N2; ++j) {
-			outputLayerActivations[i]+=network[2][i][j]*secondLayerActivations[j];
+			outputLayerActivations[i]+=network[2][i][j]*
+			  secondLayerActivations[j];
 		}
 		outputLayerActivations[i]+=network[2][i][N2];
 	}
 	Activate(3);
-
 }
 //---------------------------------------------------------------------------
 
@@ -140,7 +140,8 @@ void Network::BackwardPropagateError(int expected) {
 	firstLayerErrors.assign(N1, 0.0);
 
 	for (int i = 0; i < N3; ++i) {
-		outputLayerErrors.push_back((outputLayerActivations[i]-expected)*SigmoidDerivative(outputLayerActivations[i]));
+		outputLayerErrors.push_back((outputLayerActivations[i]-expected)*
+		  SigmoidDerivative(outputLayerActivations[i]));
 	}
 
 	for (int i = 0; i < N2; ++i) {
@@ -175,53 +176,66 @@ void Network::UpdateWeights(std::vector<double> inputData) {
 
 	for (int i = 0; i < N2; ++i) {
 		for (int j = 0; j < N1; ++j) {
-			network[1][i][j]-=learningRate*secondLayerErrors[i]*network[0][j][i];
+		  network[1][i][j]-=learningRate*secondLayerErrors[i]*network[0][j][i];
 		}
 		network[1][i][N1]-=learningRate*secondLayerErrors[i];
 	}
 
 	for (int i = 0; i < N3; ++i) {
 		for (int j = 0; j < N2; ++j) {
-			network[2][i][j]-=learningRate*outputLayerErrors[i]*network[1][j][i];
+		  network[2][i][j]-=learningRate*outputLayerErrors[i]*network[1][j][i];
 		}
 		network[2][i][N2]-=learningRate*outputLayerErrors[i];
 	}
 }
 //---------------------------------------------------------------------------
 
-
 double Network::NetworkTraining(std::vector<double> inputData, int excepted) {
 	ForwardPropagate(inputData);
 	BackwardPropagateError(excepted);
 	UpdateWeights(inputData);
-	Visualize(outputLayerActivations[0]);
-	//for (int i = 0; i < neuronsActivations.size(); ++i) {} если выходных нейронов больше 1
+	//Visualize(outputLayerActivations[0],1);
 	return outputLayerActivations[0];
 }
 //---------------------------------------------------------------------------
 
 double Network::Predict(const std::vector<double> inputData) {
 	ForwardPropagate(inputData);
-	//for (int i = 0; i < neuronsActivations.size(); ++i) {} если выходных нейронов больше 1
-	Visualize(outputLayerActivations[0]);
+	Visualize(outputLayerActivations[0],2);
 	return outputLayerActivations[0];
 }
+//---------------------------------------------------------------------------
 
-
-void Network::Visualize(double result) {
+void Network::Visualize(double result,int g) {
 	TForm1* form = dynamic_cast<TForm1*>(Application->MainForm);
 	TCanvas* canvas = form->Canvas;
 	canvas->Brush->Color = clGreen;
 	form->Canvas->Pen->Width=0;
-	//canvas->FillRect(Application->MainForm->ClientRect);
-	//form->ShowPoints();
-	double k =  18 * pow(2*abs(result-0.5),2);
+	double confidence =  8 * pow(2*abs(result-0.5),2);
 	canvas->Brush->Color= result>0.5 ? clBlue : clRed;
-	canvas->Ellipse(form->testSet[i]->GetX()-k,form->testSet[i]->GetY()-k,
-				form->testSet[i]->GetX()+k,form->testSet[i]->GetY()+k);
-	i++;
-	if (i==form->testSet.size()) {
-        i=0;
+	switch (g) {
+		case 1:
+			canvas->Ellipse(form->trainingSet[objectNum]->GetX()-confidence,
+							form->trainingSet[objectNum]->GetY()-confidence,
+							form->trainingSet[objectNum]->GetX()+confidence,
+							form->trainingSet[objectNum]->GetY()+confidence);
+		objectNum++;
+		if (objectNum==form->trainingSet.size()) {
+			objectNum=0;
+		}
+		break;
+
+		case 2:
+			canvas->Ellipse(form->testSet[objectNum]->GetX()-confidence,
+							form->testSet[objectNum]->GetY()-confidence,
+							form->testSet[objectNum]->GetX()+confidence,
+							form->testSet[objectNum]->GetY()+confidence);
+			objectNum++;
+			if (objectNum==form->testSet.size()) {
+				objectNum=0;
+			}
+    default:
+		break;
 	}
 }
 //---------------------------------------------------------------------------
