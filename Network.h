@@ -4,15 +4,13 @@
 #define NetworkH
 //---------------------------------------------------------------------------
 #include <vector>
-#include <algorithm>
 #include <random>
 #include <cmath>
-//#include <chrono>
 //---------------------------------------------------------------------------
 
 class Network{
 	private:
-		int i = 0;
+		int objectNum = 0;
 		int N0, N1, N2, N3;
 		double learningRate;
 
@@ -31,8 +29,8 @@ class Network{
 
 		void GenerateWeights();
 		void Activate(int layer);
-
 		void SetLearningRate(double lRate);
+		void Visualize(double result, int g);
 		void BackwardPropagateError(int expected);
 		void UpdateWeights(std::vector<double> inputData);
 		void ForwardPropagate(std::vector<double> inputData);
@@ -43,7 +41,7 @@ class Network{
 
 		double NetworkTraining(std::vector<double>, int excepted);
 		double Predict(const std::vector<double> inputData);
-		void Visualize(double result, int g);
+
 };
 //---------------------------------------------------------------------------
 #endif

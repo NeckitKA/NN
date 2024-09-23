@@ -201,7 +201,6 @@
             <DependentOn>Unit1.h</DependentOn>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <None Include="Unit1.dfm"/>
         <FormResources Include="Unit1.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
@@ -324,12 +323,6 @@
                 <DeployFile LocalName=".\Win64\Debug\NN.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>NN.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Unit1.dfm" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win64">
-                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

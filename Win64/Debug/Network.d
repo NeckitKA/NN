@@ -346,8 +346,6 @@
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\Vcl.ListActns.hpp \
   Network.cpp C:\Users\based\Desktop\NN/Network.h \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\vector \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\algorithm \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xheap \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\random \
   C:\Users\based\Desktop\NN/Unit1.h \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.Chart.hpp \
@@ -375,6 +373,8 @@
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\dvp.h \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\System.Math.hpp \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk\GdiPlus.h \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\algorithm \
+  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xheap \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusMem.h \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusBase.h \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\sdk/GdiplusEnums.h \
