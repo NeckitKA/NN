@@ -409,18 +409,4 @@
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\rtl\System.UIConsts.hpp \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeeSpline.hpp \
   c:\program\ files\ (x86)\embarcadero\studio\23.0\include\windows\vcl\VCLTee.TeeFunci.hpp \
-  C:\Users\based\Desktop\NN\MyPoint.h \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\iomanip \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xlocmon \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xloctime \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\fstream \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\filesystem \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\chrono \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\ratio \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\Dinkum/threads/xtimec.h \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\Dinkum/threads/xthrcommon.h \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\codecvt \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\locale \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xlocbuf \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\xlocmes \
-  c:\program\ files\ (x86)\embarcadero\studio\23.0\include\dinkumware64\list
+  C:\Users\based\Desktop\NN\MyPoint.h

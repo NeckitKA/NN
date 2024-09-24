@@ -20,9 +20,6 @@
 #include <algorithm>
 #include <random>
 #include <math.h>
-#include <iomanip>
-#include <fstream>
-#include <string>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {

@@ -202,7 +202,6 @@ double Network::Predict(const std::vector<double> inputData) {
 void Network::Visualize() {
 	TForm1* form = dynamic_cast<TForm1*>(Application->MainForm);
 	TCanvas* canvas = form->Canvas;
-	canvas->Brush->Color = clGreen;
 	form->Canvas->Pen->Width=0;
 	double confidence =  8 * pow(2*abs(outputLayerActivations[0]-0.5),2);
 	canvas->Brush->Color= outputLayerActivations[0]>0.5 ? clBlue : clRed;
